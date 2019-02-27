@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
+import "./friend.css";
 
 //Friend
 //Passing in props to display
 const FriendList = props => {
   return (
-    <div classNme="friendsList">
+    <div className="friendList">
       <p>Name: {props.friend.name}</p>
       <p>Age: {props.friend.age}</p>
       <p>Email: {props.friend.email}</p>

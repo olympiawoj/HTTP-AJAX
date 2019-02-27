@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 
 import FriendList from "./components/FriendList";
+import FriendForm from "./components/FriendForm";
 
 //Add constructor & CDM, set friends to emtpy list
 class App extends Component {
@@ -34,6 +35,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header" />
         <FriendList friends={this.state.friends} />
+        <FriendForm />
       </div>
     );
   }
