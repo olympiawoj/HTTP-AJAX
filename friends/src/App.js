@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 
+import FriendList from "./components/FriendList";
+
 //Add constructor & CDM, set friends to emtpy list
 class App extends Component {
   constructor() {
@@ -24,13 +26,14 @@ class App extends Component {
         console.log(res);
         this.setState({ friends: res.data });
       })
-      .catch(err => alert("you have CDM error:", err));
+      .catch(err => alert("you have a CDM error:", err));
   }
 
   render() {
     return (
       <div className="App">
         <header className="App-header" />
+        <FriendList friends={this.state.friends} />
       </div>
     );
   }
