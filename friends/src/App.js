@@ -33,7 +33,10 @@ class App extends Component {
   postFriendToServer = friend => {
     axios
       .post("http://localhost:5000/friends", friend)
-      .then(response => console.log("Response:", response))
+      .then(response => {
+        console.log("Response:", response);
+        this.setState({ friends: [...this.state.friends, friend] });
+      })
       .catch(error => console.log("Error: Your postFriendToServer Failed"));
   };
 
