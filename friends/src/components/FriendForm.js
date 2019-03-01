@@ -14,7 +14,7 @@ class FriendForm extends React.Component {
       }
     };
   }
-
+  //If our activeFriend is NOT null AND out activeFriend is not equal to our previous activeFriend in state, then setstate of our friend equal to our activeFriend.
   componentDidUpdate(prevProps) {
     if (
       this.props.activeFriend &&

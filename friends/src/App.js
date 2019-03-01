@@ -1,9 +1,27 @@
 import React, { Component } from "react";
-import "./App.css";
+
+import { Route, Link, NavLink } from "react-router-dom";
+
 import axios from "axios";
+
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  // NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 
 import FriendList from "./components/FriendList";
 import FriendForm from "./components/FriendForm";
+
+import "./App.css";
 
 //Add constructor & CDM, set friends to emtpy list
 class App extends Component {
@@ -75,15 +93,51 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header" />
-        <FriendList
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">Friends</NavbarBrand>
+          {/* <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={this.state.isOpen} navbar> */}
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink to="/">Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/friends-form">Add Friend</NavLink>
+            </NavItem>
+          </Nav>
+          {/* </Collapse> */}
+        </Navbar>
+
+        <Route
+          exact
+          path="/"
+          render={props => {
+            return (
+              <FriendList
+                {...props}
+                friends={this.state.friends}
+                deleteFriendFromServer={this.deleteFriendFromServer}
+                setUpdateForm={this.setUpdateForm}
+              />
+            );
+          }}
+        />
+
+        {/* <FriendList
           friends={this.state.friends}
           deleteFriendFromServer={this.deleteFriendFromServer}
           setUpdateForm={this.setUpdateForm}
-        />
-        <FriendForm
-          postFriendToServer={this.postFriendToServer}
-          activeFriend={this.state.activeFriend}
+        /> */}
+
+        <Route
+          path="/friends-form"
+          render={props => (
+            <FriendForm
+              {...props}
+              postFriendToServer={this.postFriendToServer}
+              activeFriend={this.state.activeFriend}
+            />
+          )}
         />
       </div>
     );
