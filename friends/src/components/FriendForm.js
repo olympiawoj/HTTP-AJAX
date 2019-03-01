@@ -7,12 +7,23 @@ class FriendForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      friend: {
+      friend: this.props.activeFriend || {
         name: "",
         age: "",
         email: ""
       }
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.activeFriend &&
+      prevProps.activeFriend !== this.props.activeFriend
+    ) {
+      this.setState({
+        friend: this.props.activeFriend
+      });
+    }
   }
 
   handleChange = e => {
@@ -27,6 +38,13 @@ class FriendForm extends React.Component {
   postFriend = e => {
     e.preventDefault();
     this.props.postFriendToServer(this.state.friend);
+    this.setState({
+      friend: {
+        name: "",
+        age: "",
+        email: ""
+      }
+    });
   };
 
   render() {

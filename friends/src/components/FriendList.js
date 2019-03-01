@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Friend from "./Friend";
 
 //FriendList is a functional component
@@ -13,6 +13,7 @@ const FriendList = props => {
           key={friend.email}
           friend={friend}
           deleteFriendFromServer={props.deleteFriendFromServer}
+          setUpdateForm={props.setUpdateForm}
         />
       ))}
     </div>

@@ -13,6 +13,9 @@ const Friend = props => {
       <button onClick={e => props.deleteFriendFromServer(e, props.friend.id)}>
         Delete Item
       </button>
+      <button onClick={e => props.setUpdateForm(props.friend)}>
+        Update Friend
+      </button>
     </div>
   );
 };

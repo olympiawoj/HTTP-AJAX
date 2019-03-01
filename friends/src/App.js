@@ -10,7 +10,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      friends: []
+      friends: [],
+      activeFriend: null
     };
   }
 
@@ -27,8 +28,26 @@ class App extends Component {
         console.log(response);
         this.setState({ friends: response.data });
       })
-      .catch(err => alert("you have a CDM error:", err));
+      .catch(err => alert("you have a CDM error:"));
   }
+  //Create setForm function which takes in an event and sets state with the response data
+
+  setUpdateForm = friend => {
+    this.setState({
+      activeFriend: friend
+    });
+    console.log(this.state.activeItem);
+    // this.props.history.push("/friends");
+  };
+
+  // updateFriendFromServer = () => {
+  //   axios
+  //     .put(`http://localhost:5000/friends/${id}`, friend)
+  //     .then(response => {
+  //       this.setState
+  //     })
+  //     .catch();
+  // };
 
   deleteFriendFromServer = (event, id) => {
     event.preventDefault();
@@ -60,8 +79,12 @@ class App extends Component {
         <FriendList
           friends={this.state.friends}
           deleteFriendFromServer={this.deleteFriendFromServer}
+          setUpdateForm={this.setUpdateForm}
         />
-        <FriendForm postFriendToServer={this.postFriendToServer} />
+        <FriendForm
+          postFriendToServer={this.postFriendToServer}
+          activeFriend={this.state.activeFriend}
+        />
       </div>
     );
   }
