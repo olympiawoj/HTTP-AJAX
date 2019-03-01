@@ -29,13 +29,20 @@ class App extends Component {
       })
       .catch(err => alert("you have a CDM error:", err));
   }
+  //
+  postFriendToServer = friend => {
+    axios
+      .post("http://localhost:5000/friends", friend)
+      .then(response => console.log("Response:", response))
+      .catch(error => console.log("Error: Your postFriendToServer Failed"));
+  };
 
   render() {
     return (
       <div className="App">
         <header className="App-header" />
         <FriendList friends={this.state.friends} />
-        <FriendForm />
+        <FriendForm postFriendToServer={this.postFriendToServer} />
       </div>
     );
   }

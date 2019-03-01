@@ -7,9 +7,9 @@ const FriendList = props => {
   console.log("These are props", props);
 
   return (
-    <div classNme="friendsList">
+    <div className="friendsList">
       {props.friends.map(friend => (
-        <Friend friend={friend} />
+        <Friend key={friend.email} friend={friend} />
       ))}
     </div>
   );
