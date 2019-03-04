@@ -10,6 +10,7 @@ const FriendList = props => {
     <div className="friendsList">
       {props.friends.map(friend => (
         <Friend
+          history={props.history}
           key={friend.email}
           friend={friend}
           deleteFriendFromServer={props.deleteFriendFromServer}

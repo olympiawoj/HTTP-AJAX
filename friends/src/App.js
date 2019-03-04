@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Route, Link, NavLink } from "react-router-dom";
+import { Route, Link, NavLink, withRouter } from "react-router-dom";
 
 import axios from "axios";
 
@@ -55,7 +55,7 @@ class App extends Component {
       activeFriend: friend
     });
     console.log(this.state.activeItem);
-    // this.props.history.push("/friends");
+    this.props.history.push("/friends-form");
   };
 
   // updateFriendFromServer = () => {
@@ -102,7 +102,7 @@ class App extends Component {
               <NavLink to="/">Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/friends-form">Add Friend</NavLink>
+              <NavLink to="/friends-form">Friend Form</NavLink>
             </NavItem>
           </Nav>
           {/* </Collapse> */}
@@ -144,4 +144,5 @@ class App extends Component {
   }
 }
 
-export default App;
+const AppWithRouter = withRouter(App);
+export default AppWithRouter;
