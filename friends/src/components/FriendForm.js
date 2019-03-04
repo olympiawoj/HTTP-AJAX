@@ -35,6 +35,19 @@ class FriendForm extends React.Component {
     });
   };
 
+  //define handleSubmit function to toggle between postFriend and updateFriend
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.props.activeFriend) {
+      this.props.updateFriendFromServer(
+        this.state.friend.id,
+        this.state.friend
+      );
+    } else {
+      this.props.postFriend();
+    }
+  };
+
   postFriend = e => {
     e.preventDefault();
     this.props.postFriendToServer(this.state.friend);
@@ -49,7 +62,7 @@ class FriendForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.postFriend}>
+      <form onSubmit={this.handleSubmit}>
         <input
           type="string"
           name="name"
@@ -71,7 +84,11 @@ class FriendForm extends React.Component {
           value={this.state.friend.email}
           onChange={this.handleChange}
         />
-        <button type="submit">POST FRIEND</button>
+        <button type="submit">
+          {this.props.activeFriend
+            ? "Update Friend (PUT)"
+            : "Add New Friend (POST)"}
+        </button>
       </form>
     );
   }

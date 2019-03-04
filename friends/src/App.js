@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 
-import { Route, Link, NavLink, withRouter } from "react-router-dom";
+import { Route, NavLink, withRouter } from "react-router-dom";
 
 import axios from "axios";
 
 import {
-  Collapse,
+  // Collapse,
   Navbar,
-  NavbarToggler,
+  // NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
+  NavItem
   // NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  // UncontrolledDropdown,
+  // DropdownToggle,
+  // DropdownMenu,
+  // DropdownItem
 } from "reactstrap";
 
 import FriendList from "./components/FriendList";
@@ -58,14 +58,19 @@ class App extends Component {
     this.props.history.push("/friends-form");
   };
 
-  // updateFriendFromServer = () => {
-  //   axios
-  //     .put(`http://localhost:5000/friends/${id}`, friend)
-  //     .then(response => {
-  //       this.setState
-  //     })
-  //     .catch();
-  // };
+  updateFriendFromServer = (id, friend) => {
+    axios
+      .put(`http://localhost:5000/friends/${id}`, friend)
+      .then(response => {
+        console.log("Update Response:", response);
+        this.setState({
+          activeFriend: null,
+          friends: response.data
+        });
+        this.props.history.push("/");
+      })
+      .catch(error => alert("You have an Update Friend Error"));
+  };
 
   deleteFriendFromServer = (event, id) => {
     event.preventDefault();
@@ -84,7 +89,7 @@ class App extends Component {
     axios
       .post("http://localhost:5000/friends", friend)
       .then(response => {
-        console.log("Response:", response);
+        console.log("Post Response:", response);
         this.setState({ friends: [...this.state.friends, friend] });
       })
       .catch(error => console.log("Error: Your postFriendToServer Failed"));
@@ -136,6 +141,7 @@ class App extends Component {
               {...props}
               postFriendToServer={this.postFriendToServer}
               activeFriend={this.state.activeFriend}
+              updateFriendFromServer={this.updateFriendFromServer}
             />
           )}
         />
