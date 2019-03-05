@@ -1,15 +1,21 @@
-import React, { Component } from "react";
+import React from "react";
 import Friend from "./Friend";
 
 //FriendList is a functional component
 //Passing in props to display
 const FriendList = props => {
-  console.log("These are props", props);
+  //   console.log("These are props", props);
 
   return (
-    <div classNme="friendsList">
+    <div className="friendsList">
       {props.friends.map(friend => (
-        <Friend friend={friend} />
+        <Friend
+          history={props.history}
+          key={friend.email}
+          friend={friend}
+          deleteFriendFromServer={props.deleteFriendFromServer}
+          setUpdateForm={props.setUpdateForm}
+        />
       ))}
     </div>
   );
