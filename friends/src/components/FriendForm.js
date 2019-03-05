@@ -44,7 +44,7 @@ class FriendForm extends React.Component {
         this.state.friend
       );
     } else {
-      this.props.postFriend();
+      this.postFriend(e);
     }
   };
 
